@@ -5,7 +5,7 @@ import { SelectModule } from 'primeng/select';
 import { CommonModule } from '@angular/common';
 import { StudentStore } from '../../store/student.store';
 import { DialogModule } from 'primeng/dialog';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LanguageService } from '../../../../core/services/language.service';
 import { IconsComponent } from "../../../../shared/components/icons/icons.component";
 
@@ -51,14 +51,17 @@ export class StudentsListComponent implements OnInit {
   }
 
   initialStudentForm() {
-    this.studentForm = this.fb.group({
-      name: [null],
-      department: [null],
-      email: [null],
-      phone: [null],
-    })
+  this.studentForm = this.fb.group({
+    name: [null, [Validators.required]],
+    department: [null, [Validators.required]],
+    email: [null, [Validators.required, Validators.email]],
+    phone: [null, [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]], 
+  });
+}
+ isInvalid(controlName: string): boolean {
+    const control = this.studentForm.get(controlName);
+    return !!(control && control.invalid && (control.touched || control.dirty));
   }
-
   editStudent(student: any) {
 
     this.isEditMode.set(true);
