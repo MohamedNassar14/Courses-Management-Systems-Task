@@ -1,5 +1,5 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { SelectModule } from 'primeng/select';
@@ -51,14 +51,22 @@ export class TeachersListComponent implements OnInit {
     this.initTeacherForm();
   }
 
-  initTeacherForm() {
+    initTeacherForm() {
     this.teacherForm = this.fb.group({
-      name: [null],
-      email: [null],
-      phone: [null],
-      specialization: [null],
-      rating: [null]
+      name: [null, Validators.required],
+      specialization: [null, Validators.required],
+            email: [null, [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)
+      ]],
+      phone: [null, [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]],
+      rating: [null, [Validators.required, Validators.min(1), Validators.max(5)]]
     });
+  }
+
+  isInvalid(controlName: string): boolean {
+    const control = this.teacherForm.get(controlName);
+    return !!(control && control.invalid && (control.touched || control.dirty));
   }
 
   addTeacher() {

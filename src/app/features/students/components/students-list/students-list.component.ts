@@ -48,17 +48,21 @@ export class StudentsListComponent implements OnInit {
   addStudent() {
     this.isVisibleAddEdit.set(true);
     this.isEditMode.set(false);
+    this.studentForm.reset();
   }
 
   initialStudentForm() {
-  this.studentForm = this.fb.group({
-    name: [null, [Validators.required]],
-    department: [null, [Validators.required]],
-    email: [null, [Validators.required, Validators.email]],
-    phone: [null, [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]], 
-  });
-}
- isInvalid(controlName: string): boolean {
+    this.studentForm = this.fb.group({
+      name: [null, [Validators.required]],
+      department: [null, [Validators.required]],
+      email: [null, [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)
+      ]],
+      phone: [null, [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]],
+    });
+  }
+  isInvalid(controlName: string): boolean {
     const control = this.studentForm.get(controlName);
     return !!(control && control.invalid && (control.touched || control.dirty));
   }
@@ -71,6 +75,7 @@ export class StudentsListComponent implements OnInit {
     this.selectedStudentId = student.id;
 
     this.studentForm.patchValue(student);
+
 
   }
   onSubmitData() {

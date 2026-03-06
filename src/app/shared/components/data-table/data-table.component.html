@@ -5,44 +5,19 @@
       <th *ngFor="let col of columns">
         {{ col.header }}
       </th>
-      <th>Actions</th>
+      <th>{{actionsLabel }}</th>
     </tr>
   </ng-template>
 
   <ng-template pTemplate="body" let-rowData let-columns="columns">
     <tr>
       <td *ngFor="let col of columns">
-        <ng-container *ngIf="col.format; else normal">
-          <span>{{ rowData[col.field] | date : col.format }}</span>
-        </ng-container>
-
-        <ng-template #normal>
-          <ng-container *ngIf="col.field === 'inactive'; else defaultValue">
-            <div class="toggle-switch cursor-pointer select-none"
-              (click)="iconClicked.emit({ rowData, field: col.field, value: rowData[col.field] })"
-              [class.active]="!rowData[col.field]">
-              <div class="toggle-thumb"></div>
-            </div>
-          </ng-container>
-
-
-          <ng-template #defaultValue>
-            <span [ngClass]="{
-                'bg-[#FFEA9F1A] text-[#FFCC00]':
-                  col.field === 'incidentStatusTypeName' && rowData[col.field] === 'مرحلة اشعار المواطن',
-                'bg-[#FFF3EA] text-[#D76C1F]':
-                  col.field === 'incidentStatusTypeName' && rowData[col.field] === 'مرحلة ارفاق التصاميم',
-                'bg-[#FEF1F1] text-[#991B1B]':
-                  col.field === 'incidentStatusTypeName' && rowData[col.field] === 'مرحلة التعديل علي التصاميم',
-                'bg-[#EDFCF2] text-[#2A7948]':
-                  col.field === 'incidentStatusTypeName' && rowData[col.field] === 'مرحلة اعتماد التصاميم',
-              'bg-[#009231] text-white':
-                  col.field === 'incidentStatusTypeName' && rowData[col.field] === 'تم الاعتماد',
-              }" class="px-2 py-1 rounded-md inline-flex items-center justify-center gap-1">
+          <ng-container>
+            <span class="px-2 py-1 rounded-md inline-flex items-center justify-center gap-1">
               {{ rowData[col.field] }}
             </span>
-          </ng-template>
-        </ng-template>
+          </ng-container>
+
       </td>
 
       <td>
@@ -66,7 +41,7 @@
               fill="#626262" />
           </svg>
         </div>
-        <span class="text-sm text-[#313131]">عودة</span>
+        <span class="text-sm text-[#313131]">{{ prevLabel }}</span>
       </button>
     </div>
 
@@ -81,7 +56,7 @@
       <button
         class="min-w-[75px] min-h-[36px] bg-white border border-[#E9E9E9] rounded text-sm flex justify-center items-center gap-x-2 px-3 py-1.5"
         (click)="onNextPage()">
-        <span class="text-sm text-[#313131]">التالي</span>
+        <span class="text-sm text-[#313131]">{{ nextLabel }}</span>
         <div class="icon">
           <svg width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"

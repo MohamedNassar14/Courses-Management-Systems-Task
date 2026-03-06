@@ -21,7 +21,7 @@
     <div class="data w-full flex flex-col gap-5 bg-white rounded-[20px]">
         <div class="table w-full">
             <app-data-table [data]="data()" [columns]="cols()" [actionsTemplate]="actions"
-                [totalPageCount]="data().length"></app-data-table>
+                [totalPageCount]="data().length" [actionsLabel]="t.translate('general.Actions')" [prevLabel]="t.translate('general.Previous')"  [nextLabel]="t.translate('general.Next')" ></app-data-table>
         </div>
         <ng-template #actions let-row>
             <div class="flex justify-center items-center gap-[14px]">
@@ -43,109 +43,69 @@
 
 <p-dialog header="{{isEditMode()? 'Edit Student' : 'Add Student'}}" [modal]="true" [(visible)]="isVisibleAddEdit"
     [style]="{ width: '30rem'}" [closable]="false">
-    <!-- <form [formGroup]="studentForm" (ngSubmit)="onSubmitData()">
-        <div class="content flex flex-col gap-5">
-        <div class="name flex flex-col gap-2">
-            <label>Name</label>
-            <input type="text" formControlName="name" class="w-full border border-[#F1F1F1] rounded-lg p-3 placeholder:text-[16px] placeholder:leading-6 placeholder:text-[#B3B3B3] placeholder:font-normal
-               focus:outline-none" placeholder="name" />
-        </div>
-        <div class="department flex flex-col gap-2">
-            <label>Department</label>
-            <input type="text" formControlName="department" class="w-full border border-[#F1F1F1] rounded-lg p-3 placeholder:text-[16px] placeholder:leading-6 placeholder:text-[#B3B3B3] placeholder:font-normal
-               focus:outline-none" placeholder="Department" />
-        </div>
-        <div class="email flex flex-col gap-2">
-            <label>email</label>
-            <input type="email" formControlName="email" class="w-full border border-[#F1F1F1] rounded-lg p-3 placeholder:text-[16px] placeholder:leading-6 placeholder:text-[#B3B3B3] placeholder:font-normal
-               focus:outline-none" placeholder="email" />
-        </div>
-        <div class="mobile flex flex-col gap-2">
-            <label>Mobile</label>
-            <input type="number" formControlName="phone" class="w-full border border-[#F1F1F1] rounded-lg p-3 placeholder:text-[16px] placeholder:leading-6 placeholder:text-[#B3B3B3] placeholder:font-normal
-               focus:outline-none" placeholder="Mobile Phone" />
-        </div>
-    </div>
-    <div class="actions flex gap-2 w-full mt-8">
-        <div class="w-1/2">
-            <button
-                class="min-w-[130px] main-color flex items-center justify-center gap-2 text-white bg-red-600 rounded-lg py-2 px-3 w-full"
-                type="submit">
-                {{isEditMode()? 'Edit' : 'Add'}}
-            </button>
-        </div>
-        <div class="w-1/2">
-            <button
-                class="min-w-[130px] flex items-center justify-center gap-2 border border-[#4D0F23] text-[#4D0F23] rounded-lg py-1.5 px-3 w-full"
-                (click)="isVisibleAddEdit.set(false)">
-                Close
-            </button>
-        </div>
-    </div>
-    </form> -->
     <form [formGroup]="studentForm" (ngSubmit)="onSubmitData()">
-  <div class="content flex flex-col gap-5">
+        <div class="content flex flex-col gap-5">
 
-    <div class="name flex flex-col gap-2">
-      <label>Name</label>
-      <input type="text" formControlName="name" placeholder="name"
-             class="w-full border rounded-lg p-3 focus:outline-none" />
-      <div *ngIf="isInvalid('name')" class="text-red-500 text-sm">
-        Please enter the name
-      </div>
-    </div>
+            <div class="name flex flex-col gap-2">
+                <label>Name</label>
+                <input type="text" formControlName="name" placeholder="name"
+                    class="w-full border rounded-lg p-3 focus:outline-none" />
+                <div *ngIf="isInvalid('name')" class="text-red-500 text-sm">
+                    Please enter the name
+                </div>
+            </div>
 
-    <div class="department flex flex-col gap-2">
-      <label>Department</label>
-      <input type="text" formControlName="department" placeholder="Department"
-             class="w-full border rounded-lg p-3 focus:outline-none" />
-      <div *ngIf="isInvalid('department')" class="text-red-500 text-sm">
-        Please enter the department
-      </div>
-    </div>
+            <div class="department flex flex-col gap-2">
+                <label>Department</label>
+                <input type="text" formControlName="department" placeholder="Department"
+                    class="w-full border rounded-lg p-3 focus:outline-none" />
+                <div *ngIf="isInvalid('department')" class="text-red-500 text-sm">
+                    Please enter the department
+                </div>
+            </div>
 
-    <div class="email flex flex-col gap-2">
-      <label>Email</label>
-      <input type="email" formControlName="email" placeholder="email"
-             class="w-full border rounded-lg p-3 focus:outline-none" />
-      <div *ngIf="isInvalid('email')" class="text-red-500 text-sm">
-        Please enter a valid email
-      </div>
-    </div>
+            <div class="email flex flex-col gap-2">
+                <label>Email</label>
+                <input type="email" formControlName="email" placeholder="email"
+                    class="w-full border rounded-lg p-3 focus:outline-none" />
+                <div *ngIf="isInvalid('email')" class="text-red-500 text-sm">
+                    Please enter a valid email ending with example&#64;gmail.com
+                </div>
+            </div>
 
-    <div class="mobile flex flex-col gap-2">
-      <label>Mobile</label>
-      <input type="number" formControlName="phone" placeholder="Mobile Phone"
-             class="w-full border rounded-lg p-3 focus:outline-none" />
-      <div *ngIf="isInvalid('phone')" class="text-red-500 text-sm">
-        Please enter a mobile number
-      </div>
-    </div>
+            <div class="mobile flex flex-col gap-2">
+                <label>Mobile</label>
+                <input type="number" min="0" formControlName="phone" placeholder="Mobile Phone"
+                    class="w-full border rounded-lg p-3 focus:outline-none" />
+                <div *ngIf="isInvalid('phone')" class="text-red-500 text-sm">
+                    Please enter a mobile number
+                </div>
+            </div>
 
-  </div>
+        </div>
 
-  <div class="actions flex gap-2 w-full mt-8">
-    <div class="w-1/2">
-      <button type="submit"
-              class="min-w-[130px] main-color flex items-center justify-center gap-2 text-white bg-red-600 rounded-lg py-2 px-3 w-full">
-        {{ isEditMode() ? 'Edit' : 'Add' }}
-      </button>
-    </div>
-    <div class="w-1/2">
-      <button type="button" (click)="isVisibleAddEdit.set(false)"
-              class="min-w-[130px] border border-[#4D0F23] text-[#4D0F23] rounded-lg py-2 w-full">
-        Close
-      </button>
-    </div>
-  </div>
-</form>
+        <div class="actions flex gap-2 w-full mt-8">
+            <div class="w-1/2">
+                <button type="submit" [disabled]="studentForm.invalid"
+                    class="min-w-[130px] main-color flex items-center justify-center gap-2 text-white bg-red-600 rounded-lg py-2 px-3 w-full">
+                    {{ isEditMode() ? 'Edit' : 'Add' }}
+                </button>
+            </div>
+            <div class="w-1/2">
+                <button type="button" (click)="isVisibleAddEdit.set(false)"
+                    class="min-w-[130px] border border-[#4D0F23] text-[#4D0F23] rounded-lg py-2 w-full">
+                    Close
+                </button>
+            </div>
+        </div>
+    </form>
 </p-dialog>
 
-<p-dialog header="Delete Student" [modal]="true" [(visible)]="isVisibleDelete" [style]="{ width: '30rem', color:'#DC2626' }"
-    [closable]="false">
+<p-dialog header="Delete Student" [modal]="true" [(visible)]="isVisibleDelete"
+    [style]="{ width: '30rem', color:'#DC2626' }" [closable]="false">
     <div class="mb-5 text-black">
         <h3>Are you sure you want to delete the user?</h3>
-    </div> 
+    </div>
     <div class="flex gap-2 w-full">
         <div class="w-1/2">
             <button
@@ -156,10 +116,10 @@
         </div>
         <div class="w-1/2">
             <button
-                 class="min-w-[130px] flex items-center justify-center gap-2 border border-[#4D0F23] text-[#4D0F23] rounded-lg py-1.5 px-3 w-full"
+                class="min-w-[130px] flex items-center justify-center gap-2 border border-[#4D0F23] text-[#4D0F23] rounded-lg py-1.5 px-3 w-full"
                 (click)="isVisibleDelete.set(false)">
                 Close
             </button>
         </div>
     </div>
-</p-dialog> 
+</p-dialog>

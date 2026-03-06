@@ -22,6 +22,9 @@ export class DataTableComponent implements OnInit {
   @Input() totalPageCount!: number;
   @Output() rowsCountChanged = new EventEmitter();
   @Output() iconClicked = new EventEmitter<any>();
+  @Input() actionsLabel: string = 'Actions';
+  @Input() prevLabel: string = 'Previous';
+  @Input() nextLabel: string = 'Next';
 
     options = [
     { label: 5, value: 5 },

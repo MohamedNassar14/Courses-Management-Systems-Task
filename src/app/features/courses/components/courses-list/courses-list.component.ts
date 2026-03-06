@@ -1,5 +1,5 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { CourseStore } from '../../store/course.store';
 import { Course } from '../../models/course';
@@ -41,16 +41,20 @@ export class CoursesListComponent implements OnInit {
     this.initForm();
   }
 
-  initForm() {
+    initForm() {
     this.courseForm = this.fb.group({
-      name: [null],
-      teacherIds: [[]], 
-      studentIds: [[]], 
-      schedule: [''],
-      materials: [[]]  
+      name: [null, Validators.required],
+      teacherIds: [null, Validators.required],
+      studentIds: [null, Validators.required],
+      schedule: [null, Validators.required],
+      materials: [null, Validators.required]
     });
   }
 
+  isInvalid(controlName: string): boolean {
+    const control = this.courseForm.get(controlName);
+    return !!(control && control.invalid && (control.dirty || control.touched));
+  }
   addCourse() {
     this.isVisibleAddEdit.set(true);
     this.isEditMode.set(false);

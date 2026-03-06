@@ -35,5 +35,10 @@
       "Schedule": "Schedule",
       "Actions": "Actions"
     }
+  },
+  "general": {
+    "Actions": "Actions",
+    "Previous": "Previous",
+    "Next": "Next"
   }
 }

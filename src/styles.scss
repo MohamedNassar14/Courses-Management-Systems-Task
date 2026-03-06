@@ -25,3 +25,8 @@ input:hover,
   box-shadow: 0 0 0 2px rgba(var(--bg-btns), 0.3) !important;
   outline: none !important;
 }
+
+button[disabled] {
+  cursor: not-allowed;
+  opacity: .8;
+}
