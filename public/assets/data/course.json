@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Angular Basics",
+    "teacherIds": [1],
+    "studentIds": [1,2],
+    "schedule": "Mon-Wed-Fri 10:00-12:00",
+    "materials": ["slides.pdf", "exercise1.zip"]
+  },
+  {
+    "id": 2,
+    "name": "C# Advanced",
+    "teacherIds": [2],
+    "studentIds": [2],
+    "schedule": "Tue-Thu 14:00-16:00",
+    "materials": ["notes.pdf"]
+  }
+]

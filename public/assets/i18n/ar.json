@@ -1,0 +1,38 @@
+{
+    "sidebar": {
+        "Dashboard": "لوحة التحكم",
+        "Students": "الطلاب",
+        "Teachers": "المعلمين",
+        "Courses": "الكورسات"
+    },
+    "students": {
+        "Dashboard": "لوحة التحكم",
+        "Add Student": "إضافة طالب",
+        "table": {
+            "ID": "المعرف",
+            "Name": "الاسم",
+            "Email": "البريد الإلكتروني",
+            "Actions": "الإجراءات"
+        }
+    },
+    "teachers": {
+        "Add Teacher": "إضافة معلم",
+        "table": {
+            "ID": "المعرف",
+            "Name": "الاسم",
+            "Email": "البريد الإلكتروني",
+            "Specialization": "التخصص",
+            "Rating": "التقييم",
+            "Actions": "الإجراءات"
+        }
+    },
+    "courses": {
+        "Add Course": "إضافة كورس",
+        "table": {
+            "ID": "المعرف",
+            "Name": "الاسم",
+            "Schedule": "الجدول",
+            "Actions": "الإجراءات"
+        }
+    }
+}

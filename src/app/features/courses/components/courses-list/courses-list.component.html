@@ -1,0 +1,129 @@
+<section class="courses flex flex-col gap-6">
+    <div class="head flex justify-between items-center">
+        <div class="titles flex flex-col gap-3">
+            <h2 class="text-[32px] font-bold leading-[40px] text-[#000000]">{{ t.translate('sidebar.Courses')}}</h2>
+            <div class="navigation">
+                <app-breadcrumb
+                    [subTitles]="[ { name: t.translate('sidebar.Dashboard'), routerLink: '/' }, { name: t.translate('sidebar.Courses'), routerLink: '/courses' }]">
+                </app-breadcrumb>
+            </div>
+        </div>
+        <div class="add-note">
+            <button
+                class="bg-red-500 min-w-[143px] flex items-center justify-center gap-2 text-white main-color rounded-lg py-2.5 px-3"
+                (click)="addCourse()">
+                <div class="icon">
+                    <app-icons [iconKey]="'add'"></app-icons>
+                </div>
+                <span class="text-[15px]">{{ t.translate('courses.Add Course')}}</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="data w-full flex flex-col gap-5 bg-white rounded-[20px]">
+        <div class="table w-full">
+            <app-data-table [data]="data()" [columns]="cols()" [actionsTemplate]="actions"
+                [totalPageCount]="data().length">
+            </app-data-table>
+        </div>
+        <ng-template #actions let-row>
+            <div class="flex justify-center items-center gap-[14px]">
+                <button class="edit" (click)="editCourse(row)">
+                    <app-icons [iconKey]="'edit'"></app-icons>
+                </button>
+                <button class="delete" (click)="deleteCourse(row)">
+                    <app-icons [iconKey]="'delete'"></app-icons>
+                </button>
+            </div>
+        </ng-template>
+    </div>
+</section>
+
+<p-dialog header="{{isEditMode()? 'Edit Course' : 'Add Course'}}" [modal]="true" [(visible)]="isVisibleAddEdit"
+    [style]="{ width: '30rem'}" [closable]="false">
+    <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+        <div class="content flex flex-col gap-5">
+
+            <div class="name flex flex-col gap-2">
+                <label>Name</label>
+                <input type="text" formControlName="name"
+                    class="w-full border border-[#F1F1F1] rounded-lg p-3 placeholder:text-[16px] placeholder:leading-6 placeholder:text-[#B3B3B3] placeholder:font-normal
+                    focus:outline-none"
+                    placeholder="Course Name" />
+            </div>
+
+            <div class="teachers flex flex-col gap-2">
+                <label>Teacher IDs</label>
+                <input type="text" formControlName="teacherIds"
+                    class="w-full border border-[#F1F1F1] rounded-lg p-3 placeholder:text-[16px] placeholder:leading-6 placeholder:text-[#B3B3B3] placeholder:font-normal
+                    focus:outline-none"
+                    placeholder="Comma separated IDs" />
+            </div>
+
+            <div class="students flex flex-col gap-2">
+                <label>Student IDs</label>
+                <input type="text" formControlName="studentIds"
+                    class="w-full border border-[#F1F1F1] rounded-lg p-3 placeholder:text-[16px] placeholder:leading-6 placeholder:text-[#B3B3B3] placeholder:font-normal
+                    focus:outline-none"
+                    placeholder="Comma separated IDs" />
+            </div>
+
+            <div class="schedule flex flex-col gap-2">
+                <label>Schedule</label>
+                <input type="text" formControlName="schedule"
+                    class="w-full border border-[#F1F1F1] rounded-lg p-3 placeholder:text-[16px] placeholder:leading-6 placeholder:text-[#B3B3B3] placeholder:font-normal
+                    focus:outline-none"
+                    placeholder="Course Schedule" />
+            </div>
+
+            <div class="materials flex flex-col gap-2">
+                <label>Materials</label>
+                <input type="text" formControlName="materials"
+                    class="w-full border border-[#F1F1F1] rounded-lg p-3 placeholder:text-[16px] placeholder:leading-6 placeholder:text-[#B3B3B3] placeholder:font-normal
+                    focus:outline-none"
+                    placeholder="Comma separated files" />
+            </div>
+
+        </div>
+
+        <div class="actions flex gap-2 w-full mt-8">
+            <div class="w-1/2">
+                <button
+                    class="min-w-[130px] main-color flex items-center justify-center gap-2 text-white bg-red-600 rounded-lg py-2 px-3 w-full"
+                    type="submit">
+                    {{isEditMode()? 'Edit' : 'Add'}}
+                </button>
+            </div>
+            <div class="w-1/2">
+                <button
+                    class="min-w-[130px] flex items-center justify-center gap-2 border border-[#4D0F23] text-[#4D0F23] rounded-lg py-1.5 px-3 w-full"
+                    (click)="isVisibleAddEdit.set(false)">
+                    Close
+                </button>
+            </div>
+        </div>
+    </form>
+</p-dialog>
+
+<p-dialog header="Delete Course" [modal]="true" [(visible)]="isVisibleDelete" [style]="{ width: '30rem', color:'#DC2626' }"
+    [closable]="false">
+    <div class="mb-5 text-black">
+        <h3>Are you sure you want to delete this course?</h3>
+    </div>
+    <div class="flex gap-2 w-full">
+        <div class="w-1/2">
+            <button
+                class="min-w-[130px] main-color flex items-center justify-center gap-2 text-white bg-red-600 rounded-lg py-2 px-3 w-full"
+                (click)="confirmDeleteCourse()">
+                Delete
+            </button>
+        </div>
+        <div class="w-1/2">
+            <button
+                 class="min-w-[130px] flex items-center justify-center gap-2 border border-[#4D0F23] text-[#4D0F23] rounded-lg py-1.5 px-3 w-full"
+                (click)="isVisibleDelete.set(false)">
+                Close
+            </button>
+        </div>
+    </div>
+</p-dialog>

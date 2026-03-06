@@ -1,0 +1,39 @@
+<!-- src/app/layout/sidebar/sidebar.component.html -->
+<aside class="sidebar bg-white rounded-[20px] h-100vh">
+
+  <!-- Navigation Menu -->
+  <nav class="navigation pt-3">
+    <ul class="menu-list flex flex-col gap-3">
+  
+      <li routerLink="/dashboard" class="h-[40px] flex items-center rounded-lg px-3 cursor-pointer menu-item"
+        routerLinkActive="active">
+        <a class="flex items-center gap-3">
+          <span> <app-icons [iconKey]="'dashboard'"></app-icons> </span>
+          <span>{{ t.translate('sidebar.Dashboard') }}</span>
+        </a>
+      </li>
+     
+      <li routerLink="students" class="h-[40px] flex items-center rounded-lg px-3 cursor-pointer menu-item"
+        routerLinkActive="active">
+        <a class="flex items-center gap-3">
+          <span> <app-icons [iconKey]="'students'"></app-icons> </span>
+          <span>{{ t.translate('sidebar.Students') }}</span>
+        </a>
+      </li>
+      <li routerLink="teachers" class="h-[40px] flex items-center rounded-lg px-3 cursor-pointer menu-item"
+        routerLinkActive="active">
+        <a class="flex items-center gap-3">
+          <span> <app-icons [iconKey]="'teachers'"></app-icons> </span>
+          <span>{{ t.translate('sidebar.Teachers')}}</span>
+        </a>
+      </li>
+      <li routerLink="courses" class="h-[40px] flex items-center rounded-lg px-3 cursor-pointer menu-item"
+        routerLinkActive="active">
+        <a class="flex items-center gap-3">
+          <span> <app-icons [iconKey]="'courses'"></app-icons> </span>
+          <span>{{ t.translate('sidebar.Courses') }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</aside>

@@ -1,0 +1,95 @@
+<p-table [value]="data" [columns]="columns"
+  styleClass="custom-table rounded-tr-xl rounded-tl-xl border-l border-[#DDDCDB] border-r border-[#DDDCDB] border-t border-[#DDDCDB] overflow-hidden">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{ col.header }}
+      </th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      <td *ngFor="let col of columns">
+        <ng-container *ngIf="col.format; else normal">
+          <span>{{ rowData[col.field] | date : col.format }}</span>
+        </ng-container>
+
+        <ng-template #normal>
+          <ng-container *ngIf="col.field === 'inactive'; else defaultValue">
+            <div class="toggle-switch cursor-pointer select-none"
+              (click)="iconClicked.emit({ rowData, field: col.field, value: rowData[col.field] })"
+              [class.active]="!rowData[col.field]">
+              <div class="toggle-thumb"></div>
+            </div>
+          </ng-container>
+
+
+          <ng-template #defaultValue>
+            <span [ngClass]="{
+                'bg-[#FFEA9F1A] text-[#FFCC00]':
+                  col.field === 'incidentStatusTypeName' && rowData[col.field] === 'مرحلة اشعار المواطن',
+                'bg-[#FFF3EA] text-[#D76C1F]':
+                  col.field === 'incidentStatusTypeName' && rowData[col.field] === 'مرحلة ارفاق التصاميم',
+                'bg-[#FEF1F1] text-[#991B1B]':
+                  col.field === 'incidentStatusTypeName' && rowData[col.field] === 'مرحلة التعديل علي التصاميم',
+                'bg-[#EDFCF2] text-[#2A7948]':
+                  col.field === 'incidentStatusTypeName' && rowData[col.field] === 'مرحلة اعتماد التصاميم',
+              'bg-[#009231] text-white':
+                  col.field === 'incidentStatusTypeName' && rowData[col.field] === 'تم الاعتماد',
+              }" class="px-2 py-1 rounded-md inline-flex items-center justify-center gap-1">
+              {{ rowData[col.field] }}
+            </span>
+          </ng-template>
+        </ng-template>
+      </td>
+
+      <td>
+        <ng-container *ngTemplateOutlet="actionsTemplate; context: { $implicit: rowData }"></ng-container>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<div
+  class="pagination flex justify-center items-center h-[50px] py-[14px] px-6 bg-[#F6F6F6] border-l border-[#DDDCDB] border-r border-[#DDDCDB] border-b border-[#DDDCDB] rounded-br-xl rounded-bl-xl">
+  <div class="paginator flex items-center gap-x-[6px]">
+    <div class="prev">
+      <button
+        class="min-w-[75px] min-h-[36px] bg-white border border-[#E9E9E9] rounded text-sm flex justify-center items-center gap-x-2 px-3 py-1.5"
+        (click)="onPrevPage()">
+        <div class="icon">
+          <svg width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M0.767599 7.81586C0.537923 7.577 0.54537 7.19718 0.784233 6.9675L3.93443 4L0.784233 1.0325C0.54537 0.802823 0.537922 0.422997 0.767598 0.184134C0.997274 -0.0547285 1.3771 -0.0621767 1.61596 0.167499L5.21596 3.5675C5.33361 3.68062 5.4001 3.83679 5.4001 4C5.4001 4.16321 5.33361 4.31938 5.21596 4.4325L1.61596 7.8325C1.3771 8.06218 0.997275 8.05473 0.767599 7.81586Z"
+              fill="#626262" />
+          </svg>
+        </div>
+        <span class="text-sm text-[#313131]">عودة</span>
+      </button>
+    </div>
+
+    <div class="paginator">
+      <div class="card flex justify-center gap-x-[6px]">
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"
+          [totalRecords]="totalPageCount" />
+      </div>
+    </div>
+
+    <div class="next">
+      <button
+        class="min-w-[75px] min-h-[36px] bg-white border border-[#E9E9E9] rounded text-sm flex justify-center items-center gap-x-2 px-3 py-1.5"
+        (click)="onNextPage()">
+        <span class="text-sm text-[#313131]">التالي</span>
+        <div class="icon">
+          <svg width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M5.23289 0.184136C5.46257 0.422999 5.45512 0.802824 5.21626 1.0325L2.06605 4L5.21625 6.9675C5.45512 7.19718 5.46257 7.577 5.23289 7.81587C5.00321 8.05473 4.62339 8.06218 4.38452 7.8325L0.784524 4.4325C0.666877 4.31938 0.600389 4.16321 0.600389 4C0.600389 3.83679 0.666877 3.68062 0.784524 3.5675L4.38452 0.167501C4.62339 -0.0621752 5.00321 -0.0547276 5.23289 0.184136Z"
+              fill="#626262" />
+          </svg>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

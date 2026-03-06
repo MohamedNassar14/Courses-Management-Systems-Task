@@ -1,0 +1,39 @@
+
+{
+  "sidebar": {
+    "Dashboard": "Dashboard",
+    "Students": "Students",
+    "Teachers": "Teachers",
+    "Courses": "Courses"
+  },
+  "students": {
+    "Dashboard": "Dashboard",
+    "Add Student": "Add Student",
+    "table": {
+      "ID": "ID",
+      "Name": "Name",
+      "Email": "Email",
+      "Actions": "Actions"
+    }
+  },
+  "teachers": {
+    "Add Teacher": "Add Teacher",
+    "table": {
+      "ID": "ID",
+      "Name": "Name",
+      "Email": "Email",
+      "Specialization": "Specialization",
+      "Rating": "Rating",
+      "Actions": "Actions"
+    }
+  },
+  "courses": {
+    "Add Course": "Add Course",
+    "table": {
+      "ID": "ID",
+      "Name": "Name",
+      "Schedule": "Schedule",
+      "Actions": "Actions"
+    }
+  }
+}

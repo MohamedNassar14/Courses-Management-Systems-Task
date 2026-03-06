@@ -1,0 +1,6 @@
+<div class="right-sub-titles flex items-center gap-x-2">
+  <ng-container *ngFor="let subTitle of subTitles">
+    <span [routerLink]="[subTitle.routerLink]">{{ subTitle.name}}</span>
+    <div class="icon"> <app-icons [iconKey]="'arrow'"></app-icons> </div>
+  </ng-container>
+</div>

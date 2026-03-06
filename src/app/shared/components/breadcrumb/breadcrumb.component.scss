@@ -1,0 +1,25 @@
+.right-sub-titles {
+    span {
+        color: #000000;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        cursor: pointer;
+
+        &:last-of-type {
+            color: #6d6d6d;
+        }
+    }
+
+    .icon {
+        color: #999999;
+
+        &:last-of-type {
+            display: none;
+        }
+    }
+}
+
+:host ::ng-deep .pi {
+    font-size: 16px !important;
+}

@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles - just the basics */
+:root {
+    --primary-color: #4D0F23; 
+    --bg-btns : linear-gradient(to right, #4D0F23 0%,#8E2144 75%,#4D0F23 100%);
+    --blue-bg :#05628C;
+  }
+
+body {
+  background-color: #F2F2F2;
+}
+
+.main-color {
+  background: linear-gradient(to right, #4D0F23 0%,#8E2144 75%,#4D0F23 100%);
+}
+input:focus,
+textarea:focus,
+select:focus,
+input:hover,
+.p-inputtext:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(var(--bg-btns), 0.3) !important;
+  outline: none !important;
+}

@@ -1,0 +1,29 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+  <div
+    class="overflow-hidden px-5 pt-5 pb-2 rounded-xl shadow-sm border bg-white grid grid-cols-2"
+    *ngFor="let item of stats()"
+  >
+  
+    <div>
+      <h2 class="font-bold mb-7">{{ item.title }}</h2>
+      <span class="text-4xl font-bold">{{ item.value }}</span>
+    </div>
+
+    <div class="mt-8">
+      <svg width="120" height="80" viewBox="0 0 98 50">
+        <path
+          d="M96.75 0.75C81.1531 2.04974 80.1872 33.1664 64.75 36.75C52.0202 39.7051 45.5741 22.9304 32.75 24.75C18.8403 26.7237 14.3891 44.2036 0.75 48.75H96.75V0.75Z"
+          fill="#ECFDF3"
+        />
+        <path
+          d="M0.75 48.75C14.3891 44.2036 18.8403 26.7237 32.75 24.75C45.5741 22.9304 52.0202 39.7051 64.75 36.75C80.1872 33.1664 81.1531 2.04974 96.75 0.75"
+          stroke="#12B76A"
+          stroke-width="1.5"
+        />
+      </svg>
+    </div>
+
+  </div>
+
+</div>

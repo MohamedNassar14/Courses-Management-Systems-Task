@@ -1,0 +1,17 @@
+<section class="dashboard flex flex-col gap-6 p-6 bg-gray-50 min-h-screen">
+  <div class="titles flex flex-col gap-3">
+            <h2 class="text-[32px] font-bold leading-[40px] text-[#000000]">{{ t.translate('sidebar.Dashboard')}}</h2>
+            <div class="navigation">
+                <app-breadcrumb
+                    [subTitles]="[{ name: `dashboard`, routerLink: '/' }]">
+                </app-breadcrumb>
+            </div>
+  </div>
+  <div class="stats">
+    <app-count-dashboard></app-count-dashboard>
+  </div>
+
+  <div class="chart mt-6 bg-white p-6 rounded-lg shadow">
+  <canvas id="courseChart"></canvas>
+</div>
+</section>
